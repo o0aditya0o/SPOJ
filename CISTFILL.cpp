@@ -65,14 +65,14 @@ bool possible(ll height){
 
 
 double binary_search(double low,double high){
-	if(low==high)
+	if(high-low<0.000001)
 		return low;
 	else{
 		double mid=(high-low)/2+low;
 		if(possible(mid))
 			return binary_search(low,mid);
 		else
-			return binary_search(mid+1,high);
+			return binary_search(mid,high);
 	}
 }
 int main(){
@@ -93,7 +93,7 @@ int main(){
 		inpll(v);
 		if(v>vol)
 		{
-			printf("Overflow\n");
+			printf("OVERFLOW\n");
 			continue;
 		}
 		else

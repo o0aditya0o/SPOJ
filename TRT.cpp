@@ -36,8 +36,6 @@ using namespace std;
 #define out2(n,m) printf("%d %d\n",n,m)
 #define inc(n) scanf("%c",&n)
 
-
-//cost
 #define MOD 1000000007
 #define MOD_INV 1000000006
 #define MAX 100009

@@ -46,53 +46,44 @@ using namespace std;
 typedef long long ll;
 typedef pair< pair<ll,ll>,ll > pairs;
 vector<int> v[105];
+vector<int>::iterator iv;
+int indegree[105],print[105];
+set<int> s;
+set<int>::iterator it;
 
-void topo(int n,int vis[],stack<int> &s){	
-	vis[n]=1;
-	vector<int>::iterator it;
-	it=v[n].begin();
-	while(it!=v[n].end()){
-		if(!vis[*it]){
-			topo(*it,vis,s);
-		}
-
-		it++;
-	}
-
-	s.push(n);
-	
-}
 int main(){
-	int vis[105]={0};
-	stack<int> s;
+	int count=0;
 	int n,m,a,b,c;
 	inp2(n,m);
 	rep(i,m){
 		inp2(a,b);
+		indegree[a]=b;
 		rep(i,b){
 			inp(c);
 			v[c].pb(a);
 		}
 	}
-	/*REP(i,1,n){
-		cout<<i<<" - > ";
-		it=v[i].begin();
-		while(it!=v[i].end()){
-			cout<<*it<<" ";
-			it++;
-		}
-		cout<<endl;
-	}*/
-	for(int i=1;i<=1;i++){
-		if(!vis[i]){
-			topo(i,vis,s);
+
+	while(count<n){
+	REP(i,1,n){
+		if(indegree[i]==0 && !print[i]){
+			s.insert(i);
+			}
+		}		
+		while(!s.empty()){
+			it=s.begin();
+			printf("%d ",*it);
+			print[*it]=1;
+			count++;
+			iv=v[*it].begin();
+			while(iv!=v[*it].end()){
+				indegree[*iv]--;
+				if(indegree[*iv]==0)
+					s.insert(*iv);
+				iv++;
+			}
+			s.erase(*it);			
 		}
 	}
-	while(!s.empty()){
-		printf("%d ",s.top());
-		s.pop();
-	}
-
-
 	return 0;
 }

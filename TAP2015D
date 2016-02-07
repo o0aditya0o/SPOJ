@@ -1,0 +1,84 @@
+/* -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+ * Created By : Aditya Agarwal
+ * IT, MNNIT-ALLAHABAD 
+ * aditya.mnnit15@gmail.com
+ _._._._._._._._._._._._._._._._._._._._._.*/
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define MP make_pair
+#define pb push_back
+#define rep(i,n) for(int i=0;i<n;i++)
+#define REP(i,a,b) for(int i=a;i<=b;i++)
+#define PER(i,a,b) for(int i=b;i>=a;i--)
+#define X first
+#define Y second
+
+ //i/o
+#define inp(n) scanf("%d",&n)
+#define inpl(n) scanf("%lld",&n)
+#define inp2(n,m) inp(n), inp(m)
+#define inp2l(n,m) inpl(n), inpl(m)
+
+
+//cost
+#define MOD 1000000007
+#define MOD_INV 1000000006
+#define MAX 100009
+#define INF 999999999
+#define mp make_pair
+typedef long long ll;
+typedef pair< pair<ll,ll>,ll > pairs;
+vector<int> v[1001];
+vector<int>::iterator it;
+stack<int> ss;
+int n,m,h,s,a,b,vis[1001],city,edge;
+
+ll dfs(int i){
+	vis[i]=1;
+	city=1;
+	edge=0;
+	ss.push(i);
+	while(!ss.empty()){
+		int y=ss.top();
+		ss.pop();
+		it=v[y].begin();
+		while(it!=v[y].end()){
+			if(!vis[*it]){
+				vis[*it]=1;
+				city++;
+				ss.push(*it);
+			}
+			it++;
+			edge++;
+		}
+	}
+	edge/=2;
+	return min(city*s,(((city*(city-1))/2-edge)*h));
+}
+int main(){
+	while(inp(n)!=EOF){
+		ll ans=0;
+		rep(i,n+1){
+			v[i].clear();
+			vis[i]=0;
+		}
+		inp(m);
+		inp2(h,s);
+		rep(i,m){
+			inp2(a,b);
+			v[a].pb(b);
+			v[b].pb(a);
+		}
+		REP(i,1,n){
+			if(!vis[i]){
+				ans+=dfs(i);
+			}			
+		}
+		cout<<ans<<endl;
+	}
+
+	return 0;
+}

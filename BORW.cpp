@@ -36,14 +36,14 @@ int top_down(int high,int low,int curr){
 	if(curr==n)
 		return 0;
 	int x=INF,y=INF,z=INF;
-    if(dp[high][low][curr]!=-1)
+    	if(dp[high][low][curr]!=-1)
 		return dp[high][low][curr];
 	else{
 		if(a[curr]<a[high]){
 			x=top_down(curr,low,curr+1);
 		}
 		if(a[curr]>a[low]){
-		    y=top_down(high,curr,curr+1);
+		    	y=top_down(high,curr,curr+1);
 		}
 		z=1+top_down(high,low,curr+1);
 		dp[high][low][curr]=min(x,min(y,z));
@@ -56,7 +56,6 @@ int main(){
 		inp(n);
 		if(n==-1)
 			break;
-		int maxi=-1;
 		rep(i,n){
 			inp(a[i]);
 		}
@@ -67,7 +66,6 @@ int main(){
 				}
 			}
 		}
-		dp[202][201][0]=-1;
 		a[202]=INF;
 		a[201]=0;
 		int ans=top_down(202,201,0);
